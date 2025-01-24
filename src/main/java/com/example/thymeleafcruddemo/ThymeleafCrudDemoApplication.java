@@ -1,13 +1,13 @@
-package com.example.thymeleafdemo;
+package com.example.thymeleafcruddemo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ThymeleafdemoApplication {
+public class ThymeleafCrudDemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ThymeleafdemoApplication.class, args);
+		SpringApplication.run(ThymeleafCrudDemoApplication.class, args);
 	}
 
 }
