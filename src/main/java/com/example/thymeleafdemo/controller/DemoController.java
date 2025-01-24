@@ -17,21 +17,21 @@ public class DemoController {
         return "helloworld";
     }
 
-    @RequestMapping("/showForm")
+    @GetMapping("/showForm")
     public String showForm(){
         return "helloworld-form";
     }
 
 
     /*
-    @RequestMapping("/processForm")
+    @PostMapping("/processForm")
     public String processForm(){
         return "helloworld";
     }
     */
 
     /*
-    @RequestMapping("/processForm")
+    @PostMapping("/processForm")
     public String processFormVersionTwo(HttpServletRequest request, Model model){
 
         String name = request.getParameter("studentName");
@@ -46,7 +46,7 @@ public class DemoController {
 
      */
 
-    @RequestMapping("/processForm")
+    @PostMapping("/processForm")
     public String processForm(@RequestParam("studentName") String name, Model model){
 
         name = name.toUpperCase();
