@@ -7,15 +7,25 @@
 <body>
 <form th:action="@{/process-student-form}" th:object="${student}" method="post">
     <label>First Name</label> <input type="text" th:field="*{firstName}">
+
+    <!-- Show error message if available -->
+    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error"></span>
     <br>
+
     <label>Last Name</label> <input type="text" th:field="*{lastName}">
     <br>
+
     <label>Country</label>
+    <!--
     <select th:field="*{country}">
         <option th:value="Brazil">Brazil</option>
         <option th:value="France">France</option>
         <option th:value="Germany">Germany</option>
         <option th:value="Korea">Korea</option>
+    </select>
+    -->
+    <select th:field="*{country}">
+        <option th:each="tmp: ${countries}" th:value="${tmp}" th:text="${tmp}"></option>
     </select>
 
     <br>
@@ -29,6 +39,18 @@
     <input type="checkbox" th:field="*{opSystem}" th:value="Linux"> Linux </input>
     <input type="checkbox" th:field="*{opSystem}" th:value="macOS"> macOS </input>
     <input type="checkbox" th:field="*{opSystem}" th:value="Windows"> Windows </input>
+    
+    <br>
+    <label>Free Passes:</label>
+    <input type="text" th:field="*{freePasses}">
+    <!-- Show error message if available -->
+    <span th:if="${#fields.hasErrors('freePasses')}" th:errors="*{freePasses}" class="error"></span>
+
+    <br>
+    <label>Postal Code:</label>
+    <input type="text" th:field="*{postalCode}">
+    <!-- Show error message if available -->
+    <span th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}" class="error"></span>
 
     <button type="submit" value="Submit ">submit</button>
 </form>
