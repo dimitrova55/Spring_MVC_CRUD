@@ -18,11 +18,7 @@ public class EmployeeRestController {
         this.employeeService = employeeService;
     }
 
-    // expose "/employees" and return a list of employees
     @GetMapping("/list")
-//    public List<Employee> findAll() {
-//        return employeeService.findAll();
-//    }
     public String listAllEmployees(Model model){
 
         List<Employee> employees = employeeService.findAll();
@@ -33,62 +29,41 @@ public class EmployeeRestController {
         return "list-employees";
     }
 
-    // add mapping for GET /employees/{employeeId}
-    @GetMapping("/{employeeId}")
-    public Employee getEmployee(@PathVariable int employeeId) {
-
-        Employee employee = employeeService.findById(employeeId);
-
-//        if (employee == null) {
-//            throw new RuntimeException("Employee id not found - " + employeeId);
-//        }
-
-        return employee;
-    }
-
     @GetMapping("/add")
-    public String addEmployeeForm(Model model){
+    public String еmployeeForm(Model model){
         model.addAttribute("employee", new Employee());
         return "employee-form";
     }
 
-    // add new employee
+    // add or update new employee
     @PostMapping("/save")
-//    public Employee addEmployee(@RequestBody Employee theEmployee) {
-//
-//        // in case an id is passed in JSON, set ii to 0
-//        // this is to force a save of new item instead of update
-//        theEmployee.setId(0);
-//        return employeeService.save(theEmployee);
-//    }
     public String saveEmployee(@ModelAttribute("employee") Employee employee){
-        employee.setId(0);
+        // employee.setId(0);
         employeeService.save(employee);
         return "redirect:/employees/list";
     }
 
-    // update existing employee
-    @PutMapping("/employees")
-    public Employee updateEmployee(@RequestBody Employee theEmployee) {
+    @GetMapping("/update")
+    public String updateForm(@RequestParam("employeeId") Integer id, Model model){
 
-        return employeeService.save(theEmployee);
+        Employee employee = employeeService.findById(id);
+        model.addAttribute("employee", employee);
+        return "employee-form";
     }
 
     // add mapping for DELETE /employees/{employeeId} - delete employee
 
-    @DeleteMapping("/employees/{employeeId}")
-    public String deleteEmployee(@PathVariable int employeeId) {
+    @GetMapping("/delete")
+    public String deleteEmployee(@RequestParam("employeeId") Integer id) {
 
-        Employee tempEmployee = employeeService.findById(employeeId);
+        Employee tempEmployee = employeeService.findById(id);
 
         // throw exception if null
-
         if (tempEmployee == null) {
-            throw new RuntimeException("Employee id not found - " + employeeId);
+            throw new RuntimeException("Employee id not found - " + id);
         }
+        employeeService.deleteById(id);
 
-        employeeService.deleteById(employeeId);
-
-        return "Deleted employee id - " + employeeId;
+        return "redirect:/employees/list";
     }
 }
