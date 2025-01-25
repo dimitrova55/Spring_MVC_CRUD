@@ -34,7 +34,7 @@ public class EmployeeRestController {
     }
 
     // add mapping for GET /employees/{employeeId}
-    @GetMapping("/employees/{employeeId}")
+    @GetMapping("/{employeeId}")
     public Employee getEmployee(@PathVariable int employeeId) {
 
         Employee employee = employeeService.findById(employeeId);
@@ -46,16 +46,25 @@ public class EmployeeRestController {
         return employee;
     }
 
+    @GetMapping("/add")
+    public String addEmployeeForm(Model model){
+        model.addAttribute("employee", new Employee());
+        return "employee-form";
+    }
+
     // add new employee
-    @PostMapping("/employees")
-    public Employee addEmployee(@RequestBody Employee theEmployee) {
-
-        // in case an id is passed in JSON, set ii to 0
-        // this is to force a save of new item instead of update
-
-        theEmployee.setId(0);
-
-        return employeeService.save(theEmployee);
+    @PostMapping("/save")
+//    public Employee addEmployee(@RequestBody Employee theEmployee) {
+//
+//        // in case an id is passed in JSON, set ii to 0
+//        // this is to force a save of new item instead of update
+//        theEmployee.setId(0);
+//        return employeeService.save(theEmployee);
+//    }
+    public String saveEmployee(@ModelAttribute("employee") Employee employee){
+        employee.setId(0);
+        employeeService.save(employee);
+        return "redirect:/employees/list";
     }
 
     // update existing employee
