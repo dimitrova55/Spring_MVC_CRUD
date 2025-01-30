@@ -7,18 +7,54 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-<form action="#" th:action="@{/authenticate}" method="post">
-    <h3>Login Page</h3>
-    <div>
-        <label for="username">Username: </label>
-        <input type="text" name="username" id="username">
+
+    <div class="container">
+        <h3>Login Page</h3>
+        <div id="loginbox" style="..." class="col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
+            <div class="card border-info">
+                <div class="card-header bg-info">
+                    Login
+                </div>
+                <div class="card-body">
+                    <div class="card-text">
+                        <form action="#" th:action="@{/authenticate}" method="post" class="form-horizontal">
+
+                            <div class="form-group">
+                                <div class="col-xs-15">
+                                    <div th:if="${param.error}">
+                                        <div class="alert alert-danger col-xs-offset-1 col-xs-10">
+                                            Invalid username or password.
+                                        </div>
+                                    </div>
+
+                                    <div th:if="${param.logout}">
+                                        <div class="alert alert-success col-xs-offset-1 col-xs-10">
+                                            <i>You have been logged out.</i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="..." class="input-group mb-3">
+                                <input type="text" name="username" id="username" placeholder="username" class="form-control">
+                            </div>
+
+                            <div style="..." class="input-group mb-3">
+                                <input type="password" name="password" id="password" placeholder="password" class="form-control">
+                            </div>
+
+                            <div style="..." class="form-group">
+                                <div class="col-sm-6 controls">
+                                    <button type="submit" class="btn btn-success">Login</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="password">Password: </label>
-        <input type="text" name="password" id="password">
-    </div>
-    <input type="submit" value="Login"/>
-</form>
 
 </body>
 </html>
