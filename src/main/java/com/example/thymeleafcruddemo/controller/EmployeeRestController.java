@@ -1,5 +1,7 @@
-package com.example.thymeleafcruddemo.employee;
+package com.example.thymeleafcruddemo.controller;
 
+import com.example.thymeleafcruddemo.employee.Employee;
+import com.example.thymeleafcruddemo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

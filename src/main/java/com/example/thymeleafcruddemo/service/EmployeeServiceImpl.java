@@ -1,5 +1,7 @@
-package com.example.thymeleafcruddemo.employee;
+package com.example.thymeleafcruddemo.service;
 
+import com.example.thymeleafcruddemo.employee.Employee;
+import com.example.thymeleafcruddemo.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
