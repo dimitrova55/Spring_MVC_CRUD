@@ -1,6 +1,7 @@
 package com.example.thymeleafcruddemo.aspect;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -45,4 +46,19 @@ public class DemoLoggingAspect {
             logger.info("======>> argument: " + tmpArg);
         }
     }
+
+    @AfterReturning(
+            pointcut = "forAppFlow()",
+            returning = "result"
+    )
+    public void afterReturning(JoinPoint joinPoint, Object result){
+
+        // display method we are returning from
+        String method = joinPoint.getSignature().toShortString();
+        logger.info("=======>> in @AfterReturning: calling method: " + method);
+
+        // display the data
+        logger.info("=======>> result: " + result);
+    }
+
 }
